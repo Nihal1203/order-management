@@ -1,0 +1,191 @@
+openapi: 3.0.3
+info:
+    title: Goa API
+    version: 0.0.1
+servers:
+    - url: http://localhost:80
+      description: Default server for orders
+paths:
+    /v1/orders/placeorder:
+        post:
+            tags:
+                - orders
+            summary: placeorder orders
+            operationId: orders#placeorder
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateOrderPayload'
+                        example:
+                            itemid: Nobis quam qui deleniti tempore repudiandae deleniti.
+                            quantity: 161822941
+                            size: Velit minus suscipit dolorem quod.
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                                example: Id et.
+                            example: Harum ipsam distinctio est iste consequatur magni.
+            security:
+                - session_header_Authorization: []
+    /v1/users/login:
+        post:
+            tags:
+                - users
+            summary: login users
+            operationId: users#login
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserLoginPayload'
+                        example:
+                            email: jacinto_jenkins@blickberge.info
+                            password: Id quo temporibus aut delectus voluptatem.
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                                example: Accusantium mollitia voluptatem et.
+                            example: Consequatur sunt.
+    /v1/users/register:
+        post:
+            tags:
+                - users
+            summary: register users
+            operationId: users#register
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserRegisterPayload'
+                        example:
+                            city: Ipsum magni qui quia.
+                            email: keara@ryan.info
+                            firstName: In ut esse.
+                            lastName: Eligendi quae voluptatem rem odit optio maiores.
+                            line1: Et illo quasi minus quisquam excepturi.
+                            line2: Sint quasi.
+                            password: Voluptate atque non consequatur.
+                            state: Ut consequuntur quis.
+                            zipcode: 1566885917
+            responses:
+                "200":
+                    description: OK response.
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                                example: Rem non voluptate debitis.
+                            example: Eveniet in dolor ipsum ut.
+components:
+    schemas:
+        CreateOrderPayload:
+            type: object
+            properties:
+                itemid:
+                    type: string
+                    example: Aut laboriosam omnis architecto.
+                quantity:
+                    type: integer
+                    example: 137674793
+                    format: int32
+                size:
+                    type: string
+                    example: Excepturi ex.
+            description: Create Order Payload
+            example:
+                itemid: Corporis nemo molestiae at.
+                quantity: 1754008067
+                size: Est sint debitis.
+            required:
+                - itemid
+                - quantity
+                - size
+        UserLoginPayload:
+            type: object
+            properties:
+                email:
+                    type: string
+                    example: blanche@hansen.com
+                    format: email
+                password:
+                    type: string
+                    example: Rerum ut nobis libero.
+            example:
+                email: jed.dach@treutelbernier.net
+                password: Quis aperiam blanditiis soluta voluptate.
+            required:
+                - email
+                - password
+        UserRegisterPayload:
+            type: object
+            properties:
+                city:
+                    type: string
+                    example: Iste maiores occaecati inventore iusto dolor rem.
+                email:
+                    type: string
+                    example: liliana_mertz@nolanhoppe.net
+                    format: email
+                firstName:
+                    type: string
+                    example: Aut sunt qui perspiciatis fugit officia quas.
+                lastName:
+                    type: string
+                    example: Cum veniam a explicabo omnis officia.
+                line1:
+                    type: string
+                    example: Animi repellat in.
+                line2:
+                    type: string
+                    example: Aspernatur ut perspiciatis culpa.
+                password:
+                    type: string
+                    example: Dolor porro est blanditiis.
+                state:
+                    type: string
+                    example: Voluptatum esse iusto neque.
+                zipcode:
+                    type: integer
+                    example: 572704677
+                    format: int32
+            description: This is a user creation payload
+            example:
+                city: At esse eaque.
+                email: bud@bechtelarheaney.info
+                firstName: Nemo et at optio.
+                lastName: Dignissimos nihil incidunt distinctio.
+                line1: Quasi error.
+                line2: Repellendus odio totam qui.
+                password: Blanditiis ullam.
+                state: Provident dolor deleniti voluptatem.
+                zipcode: 942666476
+            required:
+                - firstName
+                - email
+                - line1
+                - city
+                - state
+                - zipcode
+                - password
+    securitySchemes:
+        session_header_Authorization:
+            type: http
+            description: Session ID passed as Bearer token
+            scheme: bearer
+            bearerFormat: JWT
+tags:
+    - name: orders
+    - name: users
+      description: This is a user service.This server contains all user related functionalities.

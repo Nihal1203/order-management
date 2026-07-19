@@ -1,0 +1,185 @@
+swagger: "2.0"
+info:
+    title: ""
+    version: 0.0.1
+host: localhost:80
+consumes:
+    - application/json
+    - application/xml
+    - application/gob
+produces:
+    - application/json
+    - application/xml
+    - application/gob
+paths:
+    /v1/orders/placeorder:
+        post:
+            tags:
+                - orders
+            summary: placeorder orders
+            operationId: orders#placeorder
+            parameters:
+                - name: PlaceorderRequestBody
+                  in: body
+                  required: true
+                  schema:
+                    $ref: '#/definitions/OrdersPlaceorderRequestBody'
+                    required:
+                        - itemid
+                        - quantity
+                        - size
+            responses:
+                "200":
+                    description: OK response.
+                    schema:
+                        type: string
+            schemes:
+                - http
+            security:
+                - session_header_Authorization: []
+    /v1/users/login:
+        post:
+            tags:
+                - users
+            summary: login users
+            operationId: users#login
+            parameters:
+                - name: LoginRequestBody
+                  in: body
+                  required: true
+                  schema:
+                    $ref: '#/definitions/UserLoginPayload'
+                    required:
+                        - email
+                        - password
+            responses:
+                "200":
+                    description: OK response.
+                    schema:
+                        type: string
+            schemes:
+                - http
+    /v1/users/register:
+        post:
+            tags:
+                - users
+            summary: register users
+            operationId: users#register
+            parameters:
+                - name: RegisterRequestBody
+                  in: body
+                  required: true
+                  schema:
+                    $ref: '#/definitions/UserRegisterPayload'
+                    required:
+                        - firstName
+                        - email
+                        - line1
+                        - city
+                        - state
+                        - zipcode
+                        - password
+            responses:
+                "200":
+                    description: OK response.
+                    schema:
+                        type: string
+            schemes:
+                - http
+definitions:
+    OrdersPlaceorderRequestBody:
+        title: OrdersPlaceorderRequestBody
+        type: object
+        properties:
+            itemid:
+                type: string
+                example: Aut asperiores laudantium autem est asperiores.
+            quantity:
+                type: integer
+                example: 1549046925
+                format: int32
+            size:
+                type: string
+                example: Odit inventore.
+        example:
+            itemid: Fuga qui quia sit consectetur.
+            quantity: 1149636951
+            size: Animi eum unde saepe.
+        required:
+            - itemid
+            - quantity
+            - size
+    UserLoginPayload:
+        title: UserLoginPayload
+        type: object
+        properties:
+            email:
+                type: string
+                example: mariana_pouros@cummeratamohr.net
+                format: email
+            password:
+                type: string
+                example: Vel enim.
+        example:
+            email: kristopher_hauck@jewessrath.name
+            password: Ratione quasi quisquam amet laudantium ut delectus.
+        required:
+            - email
+            - password
+    UserRegisterPayload:
+        title: UserRegisterPayload
+        type: object
+        properties:
+            city:
+                type: string
+                example: Corrupti rem consequuntur qui suscipit.
+            email:
+                type: string
+                example: westley@reynolds.com
+                format: email
+            firstName:
+                type: string
+                example: Et sed.
+            lastName:
+                type: string
+                example: Eum aperiam deleniti nihil aut veniam.
+            line1:
+                type: string
+                example: Aut sit et adipisci nisi odio.
+            line2:
+                type: string
+                example: Molestias sint et odit quidem.
+            password:
+                type: string
+                example: Omnis cupiditate nihil voluptatibus et magnam quos.
+            state:
+                type: string
+                example: Quia quibusdam et quo dolores architecto.
+            zipcode:
+                type: integer
+                example: 2138749624
+                format: int32
+        example:
+            city: Hic blanditiis quo.
+            email: sofia@ohara.biz
+            firstName: Ut tempore nobis est dolor qui modi.
+            lastName: Dolores quibusdam laboriosam libero.
+            line1: Adipisci dolor quos occaecati.
+            line2: Esse reiciendis.
+            password: Sed iure rerum non rem repudiandae.
+            state: Eos et non sint repellat.
+            zipcode: 797121752
+        required:
+            - firstName
+            - email
+            - line1
+            - city
+            - state
+            - zipcode
+            - password
+securityDefinitions:
+    session_header_Authorization:
+        type: apiKey
+        description: Session ID passed as Bearer token
+        name: Authorization
+        in: header
